@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Book List{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2>Book List</h2>
+        {% if user.is_authenticated %}
+            <a href="{% url 'book-create' %}" class="btn btn-success mb-3">Add Book</a>
+        {% endif %}
+        <ul class="list-group">
+            {% for book in books %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{% url 'book-detail' book.id %}">{{ book.title }}</a>
+                    {% if user.is_authenticated %}
+                        <div>
+                            <a href="{% url 'book-update' book.id %}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{% url 'book-delete' book.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
