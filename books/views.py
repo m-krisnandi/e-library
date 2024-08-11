@@ -18,8 +18,12 @@ def book_create(request):
 
 # Read (Daftar Buku)
 def book_list(request):
-    books = Book.objects.all()
-    return render(request, 'book_list.html', {'books': books})
+    query = request.GET.get('q')
+    if query:
+        books = Book.objects.filter(title__icontains=query)
+    else:
+        books = Book.objects.all()
+    return render(request, 'book_list.html', {'books': books, 'query': query})
 
 # Read (Detail Buku)
 def book_detail(request, id):
