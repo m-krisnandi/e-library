@@ -7,7 +7,7 @@ The E-Library Application is a simple web application built using Django, design
 ## Features
 
 - **User Registration & Login**: Users can register and log in to the application.
-- **Authentication**: The application uses JWT-based authentication for secure access.
+- **Authentication**: The application uses authentication for secure access.
 - **Book Management**: Authenticated users can add, update, and delete books.
 - **Book Browsing**: All users can browse the book catalog and view detailed information about each book.
 
