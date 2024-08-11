@@ -1,14 +1,52 @@
 {% extends "base_generic.html" %}
 
-{% block title %}Book Form{% endblock %}
+{% block title %}{{ form.instance.pk|yesno:"Edit,Create" }} Book{% endblock %}
 
 {% block content %}
     <div class="container mt-4">
-        <h2>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Book</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+        <h2 class="mb-4">{{ form.instance.pk|yesno:"Edit,Create" }} Book</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.title.label_tag }}
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                            <div class="text-danger">{{ form.title.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.author.label_tag }}
+                        {{ form.author }}
+                        {% if form.author.errors %}
+                            <div class="text-danger">{{ form.author.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                        {% if form.description.errors %}
+                            <div class="text-danger">{{ form.description.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.published_date.label_tag }}
+                        {{ form.published_date }}
+                        {% if form.published_date.errors %}
+                            <div class="text-danger">{{ form.published_date.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.cover_image_url.label_tag }}
+                        {{ form.cover_image_url }}
+                        {% if form.cover_image_url.errors %}
+                            <div class="text-danger">{{ form.cover_image_url.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Save</button>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}

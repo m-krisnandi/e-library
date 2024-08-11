@@ -6,6 +6,7 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     description = models.TextField()
     published_date = models.DateField()
+    cover_image_url = models.URLField(max_length=200, blank=True)
 
     def __str__(self):
         return self.title

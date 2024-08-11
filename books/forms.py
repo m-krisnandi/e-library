@@ -13,7 +13,7 @@ class RegisterForm(UserCreationForm):
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ['title', 'author', 'description', 'published_date']
+        fields = ['title', 'author', 'description', 'published_date', 'cover_image_url']
         widgets = {
             'published_date': forms.DateInput(attrs={'type': 'date'}),
         }

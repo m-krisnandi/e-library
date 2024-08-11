@@ -4,13 +4,29 @@
 
 {% block content %}
     <div class="container mt-4">
-        <h2>{{ book.title }}</h2>
-        <p><strong>Author:</strong> {{ book.author }}</p>
-        <p><strong>Published Date:</strong> {{ book.published_date }}</p>
-        <p>{{ book.description }}</p>
-        {% if user.is_authenticated %}
-            <a href="{% url 'book-update' book.id %}" class="btn btn-primary">Edit</a>
-        {% endif %}
-        <a href="{% url 'book-list' %}" class="btn btn-secondary">Back to List</a>
+        <div class="row">
+            <div class="col-md-4">
+                {% if book.cover_image_url %}
+                    <img src="{{ book.cover_image_url }}" alt="{{ book.title }}" class="img-fluid rounded shadow-sm">
+                {% else %}
+                    <img src="https://via.placeholder.com/150" alt="No cover available"
+                         class="img-fluid rounded shadow-sm">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+                <h2>{{ book.title }}</h2>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Published Date:</strong> {{ book.published_date }}</p>
+                <p>{{ book.description }}</p>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'book-update' book.id %}" class="btn btn-primary">Edit</a>
+                    <form action="{% url 'book-delete' book.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                {% endif %}
+                <a href="{% url 'book-list' %}" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
